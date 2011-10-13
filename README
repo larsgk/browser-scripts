@@ -1,0 +1,34 @@
+1. Follow instructions here to get Scratchbox for Harmattan installed:
+
+http://www.developer.nokia.com/Community/Wiki/Harmattan:Platform_Guide/Getting_started_with_Harmattan_Platform_SDK/Installing_Harmattan_Platform_SDK
+
+Quick steps:
+
+$ wget http://harmattan-dev.nokia.com/unstable/beta2/harmattan-sdk-setup.py
+$ chmod +x harmattan-sdk-setup.py
+$ sudo ./harmattan-sdk-setup.py admininstall
+
+Post install:  logout/login to get user access to /scratchbox/login
+
+verify by writing '/scratchbox/login'  (CTRL+D to exit)
+
+2. Do the following to prepare your environment
+
+$ cd
+$ mkdir ls /scratchbox/users/$USER/home/$USER/swork
+$ ln -s /scratchbox/users/$USER/home/$USER/swork
+
+You should now have a working dir (~/swork), residing in/accessible from scratchbox, linked in the root of your user root.
+
+(outside scratchbox)
+$ cd swork
+$ wget <prefix...>harmattan-qt5-wk2-setup.sh
+$ chmod +x harmattan-qt5-wk2-setup.sh
+$ ./harmattan-qt5-wk2-setup.sh
+
+This should install the necessary deps and fetch the sources needed.
+
+
+
+
+
