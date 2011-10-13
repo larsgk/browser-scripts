@@ -22,9 +22,10 @@ You should now have a working dir (~/swork), residing in/accessible from scratch
 
 (outside scratchbox)
 $ cd swork
-$ wget <prefix...>harmattan-qt5-wk2-setup.sh
-$ chmod +x harmattan-qt5-wk2-setup.sh
-$ ./harmattan-qt5-wk2-setup.sh
+$ git clone git@github.com:larsgk/browser-scripts.git
+$ browser-scripts/builddeps-install.sh
+$ browser-scripts/clone-sources.sh
+$ browser-scripts/build-sources.sh
 
 This should install the necessary deps and fetch the sources needed.
 
