@@ -14,14 +14,13 @@ verify by writing '/scratchbox/login'  (CTRL+D to exit)
 
 2. Do the following to prepare your environment
 
-$ cd
-$ mkdir ls /scratchbox/users/$USER/home/$USER/swork
+$ mkdir /scratchbox/users/$USER/home/$USER/swork
 $ ln -s /scratchbox/users/$USER/home/$USER/swork
 
 You should now have a working dir (~/swork), residing in/accessible from scratchbox, linked in the root of your user root.
 
 (outside scratchbox)
-$ cd swork
+$ cd ~/swork
 $ git clone git@github.com:larsgk/browser-scripts.git
 $ browser-scripts/builddeps-install.sh
 $ browser-scripts/clone-sources.sh
