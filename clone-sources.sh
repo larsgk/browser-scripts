@@ -15,6 +15,9 @@ cd qtbase
 git submodule update --init
 cd ..
 
+echo "Fetching qtxmlpatterns..."
+git clone git://gitorious.org/qt/qtxmlpatterns.git
+
 echo "Fetching qtdeclarative..."
 git clone git://gitorious.org/qt/qtdeclarative.git
 

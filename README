@@ -12,6 +12,10 @@ Post install:  logout/login to get user access to /scratchbox/login
 
 verify by writing '/scratchbox/login'  (CTRL+D to exit)
 
+Sync resolv.conf and host.conf for network access in scratchbox:
+ 
+$ sudo /scratchbox/sbin/sbox_sync
+
 2. Do the following to prepare your environment
 
 $ mkdir /scratchbox/users/$USER/home/$USER/swork

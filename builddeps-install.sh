@@ -1,10 +1,13 @@
 #!/bin/sh
 
+d=`dirname $0`
+. $d/common.sh
+
 set -e
 
 echo "Installing deps..."
 
-sudo apt-get -y build-dep qt4-x11
+$sudo apt-get -y --force-yes build-dep qt4-x11
 
 deps_install_host="\
 libxcb1 \
@@ -65,9 +68,9 @@ else
 fi
 
 (dpkg --status $deps_install 2>&1 | grep not.installed ) && \
- ($sudo apt-get update && $sudo apt-get -y install $deps_install)
+ ($sudo apt-get update && $sudo apt-get -y --force-yes install $deps_install)
 
-sudo apt-get -y remove --purge $deps_purge
+$sudo apt-get -y --force-yes remove --purge $deps_purge
 
 echo "Done"
 
