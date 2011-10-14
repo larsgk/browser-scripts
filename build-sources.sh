@@ -9,42 +9,27 @@ echo "Building Qt5..."
 
 SUPPORT_DIR=~/swork/browser-support
 
-BUILDDIR=$SUPPORT_DIR/build-$build_suffix
-QT5_BUILDDIR=$BUILDDIR/qt5
+QT5_DIR=$SUPPORT_DIR/qt5
 
-mkdir -p $QT5_BUILDDIR
-cd $QT5_BUILDDIR
-
-$SUPPORT_DIR/qtbase/configure -nomake demos -nomake examples -nomake tests -nokia-developer -fast && make $makeargs
-QTDIR=$QT5_BUILDDIR
-PATH=$QT5_BUILDDIR/bin:$PATH
-
-mkdir -p $QT5_BUILDDIR/qtdeclarative && cd $QT5_BUILDDIR/qtdeclarative && qmake $SUPPORT_DIR/qtdeclarative && make $makeargs && make install
-
-if [ $? -ne 0 ] ; then
-echo Aborting build.
-exit 1
+if [ "$device_target" == "armel" ]; then
+    extra_configure_flags="-platform unsupported/linux-host-g++ -xplatform linux-g++-maemo -force-pkg-config"
 fi
 
 
-mkdir -p $QT5_BUILDDIR/qtscript && cd $QT5_BUILDDIR/qtscript && qmake $SUPPORT_DIR/qtscript && make $makeargs && make install
+cd $QT5_DIR && ./configure -fast -nomake demos -nomake examples -nomake tests -nokia-developer $extra_configure_flags && make $makeargs
 
-if [ $? -ne 0 ] ; then
-echo Aborting build.
-exit 1
-fi
+QTDIR=$QT5_DIR/qtbase
+PATH=$QTDIR/bin:$PATH
 
+echo "Building WebKit2..."
 
-mkdir -p $QT5_BUILDDIR/qtsvg && cd $QT5_BUILDDIR/qtsvg && qmake $QT5_SUPPORT_DIR/qtsvg && make $makeargs && make install
+cd $SUPPORT_DIR/webkit
 
-if [ $? -ne 0 ] ; then
-echo Aborting build.
-exit 1
-fi
+./Tools/Scripts/build-webkit -2 --qt --release --no-3d-canvas --makearg="CONFIG+=use_qt_mobile_theme ${makeargs}"
 
 echo
 echo Build Completed, run the following to use your new Qt build:
-echo export PATH=$QT5_BUILDDIR/bin:\$PATH
+echo export PATH=$QTDIR/bin:\$PATH
 
 echo "Done"
 

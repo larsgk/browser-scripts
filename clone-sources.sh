@@ -10,19 +10,16 @@ mkdir -p $SUPPORT_DIR
 cd $SUPPORT_DIR
 
 echo "Fetching qtbase..."
-git clone git://gitorious.org/qt/qtbase.git
+git clone git://gitorious.org/qt/qt5.git qt5
+cd qt5
+git checkout 37ea8e961b8fdaaa1f36758b8ad059b23c013f15
+./init-repository --module-subset=qtbase,qtxmlpatterns,qtscript,qtdeclarative
+wget -O patch.txt http://paste.kde.org/133597/raw/
 cd qtbase
-git submodule update --init
-cd ..
+git am -3 ../patch.txt
 
-echo "Fetching qtxmlpatterns..."
-git clone git://gitorious.org/qt/qtxmlpatterns.git
 
-echo "Fetching qtdeclarative..."
-git clone git://gitorious.org/qt/qtdeclarative.git
-
-echo "Fetching qtscript..."
-git clone git://gitorious.org/qt/qtscript.git
+cd $SUPPORT_DIR
 
 echo "Fetching webkit..."
 git clone git://gitorious.org/webkit/webkit.git
