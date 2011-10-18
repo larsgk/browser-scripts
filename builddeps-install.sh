@@ -34,7 +34,10 @@ libxcb-render-util0 \
 libxcb-render-util0-dev
 "
 
-deps_purge_m="";
+deps_purge_m="\
+libxcb-render-util0 \
+libxcb-render-util0-dev
+"
 
 deps_install_m_armel="\
 libgles2 \
@@ -42,6 +45,21 @@ libgles2-sgx-img-dev \
 opengles-sgx-img-common \
 opengles-sgx-img-common-dev \
 meego-gstreamer0.10-interfaces-dev \
+libxcb1 \
+libxcb1-dev \
+libx11-xcb1 \
+libx11-xcb-dev \
+libxcb-keysyms1 \
+libxcb-keysyms1-dev \
+libxcb-image0 \
+libxcb-image0-dev \
+libxcb-shm0 \
+libxcb-shm0-dev \
+libxcb-icccm1 \
+libxcb-icccm1-dev \
+libxcb-sync0 \
+libxcb-sync0-dev \
+libxcb-xfixes0-dev
 "
 
 deps_install_m_i386="libgl-dev libgl1"
