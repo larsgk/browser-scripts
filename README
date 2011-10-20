@@ -19,7 +19,7 @@ $ sudo /scratchbox/sbin/sbox_sync
 2. Do the following to prepare your environment
 
 $ mkdir /scratchbox/users/$USER/home/$USER/swork
-$ ln -s /scratchbox/users/$USER/home/$USER/swork
+$ ln -s /scratchbox/users/$USER/home/$USER/swork ~/swork
 
 You should now have a working dir (~/swork), residing in/accessible from scratchbox, linked in the root of your user root.
 
