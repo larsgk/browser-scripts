@@ -1,9 +1,10 @@
 # common script functionality
 # variables exported
-#  d = script directory
+#  script_dir = script directory, absolute path
 
 #  build_suffix= suffix of builddir: [webkit1|]-[armel|i386|host]-[m6]
 
+set -e
 
 die() {
     echo "$0: error: $1"
@@ -17,10 +18,16 @@ is_sbox() {
     return 0
 }
 
+script_file=`readlink -f $0`
+script_dir=`dirname $script_file`
+
+shared_dir=~/swork
+qt5_dir=$shared_dir/qt5
+webkit_dir=$shared_dir/webkit
+
 #default to host m6 build
 device_target=${device_target:-"host"}
 meego_target="m6"
-
 
 d=`dirname $0`
 
@@ -31,10 +38,13 @@ else
     sudo="sudo"
 fi
 
+
 # export DEB_BUILD_OPTIONS=parallel=30 if you want 30 jobs
 parallel_jobs=$(echo $DEB_BUILD_OPTIONS | sed -e 's/.*parallel=\([0-9]\+\).*/\1/')
-if [ "$parallel_jobs" == "$DEB_BUILD_OPTIONS" ]; then
-    parallel_jobs=""
+if [ -n "$parallel_jobs" ]; then
+    if [ "$parallel_jobs" == "$DEB_BUILD_OPTIONS" ]; then
+	parallel_jobs=""
+    fi
 fi
 
 if [ -z "$parallel_jobs" ]; then
@@ -42,19 +52,20 @@ if [ -z "$parallel_jobs" ]; then
         parallel_jobs=$(expr $(grep 'processor' /proc/cpuinfo | wc -l) \* 2 + 1)
     fi
 fi
+
 if [ -z "$parallel_jobs" ]; then
     # most people have dual-cores..
     parallel_jobs=3
 fi
 
-
 makeargs=${makeargs:-"-j${parallel_jobs}"}
 browser_buildmode=debug
-webkit_buildmode=--debug
-webkit_buildmodedir=Debug
+webkit_buildmode=--release
+webkit_buildmodedir=Release
 webkit="qtwebkit-webkit2-dev"
 release=
 valgrind=
+quiet_build=
 while [ $# -gt 0 ]; do
     case $1 in
         --release)
@@ -74,6 +85,11 @@ while [ $# -gt 0 ]; do
 
         --webkit_debug)
             webkit_buildmode=--debug
+	    webkit_buildmodedir=Debug
+            shift
+            ;;
+        --valgrind)
+            valgrind=1
             shift
             ;;
         *)
@@ -97,5 +113,13 @@ fi
 
 build_suffix=$device_target-$meego_target
 
+qmake_valgrind=""
+valgrind_target=""
+if [ -n "$valgrind" ]; then
+    qmake_valgrind="--qmakearg=CONFIG+=valgrind"
+    valgrind_target="-valgrind"
+fi
+
+build_suffix=$device_target-$meego_target$valgrind_target
 
 
