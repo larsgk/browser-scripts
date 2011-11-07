@@ -15,9 +15,17 @@ if [ "$device_target" == "armel" ]; then
     extra_configure_flags="-platform unsupported/linux-host-g++ -xplatform linux-g++-maemo -force-pkg-config"
 fi
 
+cd $qt5_dir
+
+echo "Cleaning Qt5 directory..."
+
+if [ -n "${clean}" ]; then
+    git submodule foreach git clean -fdx
+    git clean -fdx
+fi
+
 echo "Building Qt5..."
 
-cd $qt5_dir
 ./configure -fast -nomake demos -nomake examples -nomake tests -nokia-developer $extra_configure_flags
 make $makeargs
 

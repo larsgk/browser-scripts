@@ -65,7 +65,7 @@ webkit_buildmodedir=Release
 webkit="qtwebkit-webkit2-dev"
 release=
 valgrind=
-quiet_build=
+clean=
 while [ $# -gt 0 ]; do
     case $1 in
         --release)
@@ -90,6 +90,10 @@ while [ $# -gt 0 ]; do
             ;;
         --valgrind)
             valgrind=1
+            shift
+            ;;
+        --clean)
+            clean=1
             shift
             ;;
         *)

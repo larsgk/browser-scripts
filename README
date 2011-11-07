@@ -21,9 +21,9 @@ $ sudo /scratchbox/sbin/sbox_sync
 $ mkdir /scratchbox/users/$USER/home/$USER/swork
 $ ln -s /scratchbox/users/$USER/home/$USER/swork ~/swork
 
-You should now have a working dir (~/swork), residing in/accessible from scratchbox, linked in the root of your user root.
+You should now have a working dir (~/swork), residing in/accessible from Scratchbox, linked in the root of your user root.
 
-(outside scratchbox)
+(outside Scratchbox)
 $ cd ~/swork
 $ git clone git@github.com:larsgk/browser-scripts.git
 $ browser-scripts/builddeps-install.sh
@@ -32,6 +32,14 @@ $ browser-scripts/build-sources.sh
 
 This should install the necessary deps and fetch the sources needed.
 
+In order to get git installed inside Scratchbox please follow these steps:
+
+sudo echo "deb http://scratchbox.org/debian harmattan main" >> /etc/apt/sources.list.d/sb.list
+sudo apt-get update
+sudo apt-get install scratchbox-devkit-git
+
+Add this to your PATH inside Scratchbox:
+/scratchbox/devkits/git/bin
 
 
 
