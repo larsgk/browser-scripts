@@ -14,9 +14,8 @@ if [ -e ${qt5_dir} ]; then
 else
     git clone git://gitorious.org/qt/qt5.git qt5
     cd qt5
-    git checkout 90f7cf110710bb59c2993d6d1848223baeb9642b
+    git checkout 6df6e99be09731991a1689cf1a71c601f4814865
     ./init-repository --module-subset=qtbase,qtxmlpatterns,qtscript,qtdeclarative
-    cd qtdeclarative && git fetch http://codereview.qt-project.org/p/qt/qtdeclarative refs/changes/17/7617/1 && git cherry-pick FETCH_HEAD
 fi
 
 cd $shared_dir
