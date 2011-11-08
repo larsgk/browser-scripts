@@ -21,6 +21,8 @@ $ sudo /scratchbox/sbin/sbox_sync
 $ mkdir /scratchbox/users/$USER/home/$USER/swork
 $ ln -s /scratchbox/users/$USER/home/$USER/swork ~/swork
 
+NB: You don't need the explixit swork directory as long as the script directory resides on the same level as the source directories.
+
 You should now have a working dir (~/swork), residing in/accessible from Scratchbox, linked in the root of your user root.
 
 (outside Scratchbox)

@@ -21,7 +21,7 @@ is_sbox() {
 script_file=`readlink -f $0`
 script_dir=`dirname $script_file`
 
-shared_dir=~/swork
+shared_dir=$script_dir/..
 qt5_dir=$shared_dir/qt5
 webkit_dir=$shared_dir/webkit
 

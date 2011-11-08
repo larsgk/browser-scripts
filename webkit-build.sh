@@ -18,7 +18,7 @@ echo "Building WebKit..."
 mkdir -p $webkit-builddir-$build_suffix
 export WEBKITOUTPUTDIR=$PWD/$webkit-builddir-$build_suffix
 
-$webkit_dir/Tools/Scripts/build-webkit -2 --qt $webkit_buildmode \
+$webkit_dir/Tools/Scripts/build-webkit --qt $webkit_buildmode \
     --makearg="CONFIG+=use_qt_mobile_theme ${makeargs}" \
     --no-3d-canvas \
     $qmake_valgrind \
